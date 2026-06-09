@@ -8,6 +8,7 @@ return [
     'Subscriptions' => 'Abonnements',
     'Invoices' => 'Factures',
     'Payments' => 'Paiements',
+    'Invoice' => 'Facture',
     'No Stripe customer' => 'Aucun client Stripe',
     'Loading Stripe…' => 'Chargement Stripe…',
     'Could not load Stripe data.' => 'Impossible de charger les données Stripe.',

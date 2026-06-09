@@ -20,6 +20,7 @@ class StripeWidgetController extends Controller
     public function show($conversation)
     {
         $conversation = Conversation::findOrFail($conversation);
+        $this->authorize('viewCached', $conversation);
 
         $setting = StripeSetting::where('mailbox_id', $conversation->mailbox_id)->first();
         if (!$setting || !$setting->stripe_secret_key) {

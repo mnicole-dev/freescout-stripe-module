@@ -54,7 +54,8 @@ class StripeApiGateway implements StripeGateway
             'customer' => $customerId, 'status' => 'active', 'limit' => 10,
         ]);
         return array_map(function ($s) {
-            $price = $s->items->data[0]->price ?? null;
+            $item = $s->items->data[0] ?? null;
+            $price = $item->price ?? null;
             return [
                 'status' => $s->status,
                 'plan' => $price->nickname ?? ($price->id ?? ''),

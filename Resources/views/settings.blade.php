@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">{{ __('Restricted API Key') }}</label>
                     <div class="col-sm-6">
-                        <input type="text" class="form-control" name="stripe_secret_key"
+                        <input type="password" class="form-control" name="stripe_secret_key"
                                value="{{ $secret_key }}" placeholder="rk_live_…">
                         <p class="form-help">{!! __('Recommended: a <a href="https://dashboard.stripe.com/apikeys" target="_blank">restricted API key</a> with <strong>read</strong> permission on Customers, Subscriptions, Invoices and Charges. A full secret key also works. Stored encrypted.') !!}</p>
                     </div>
