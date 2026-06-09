@@ -1,0 +1,5 @@
+.stripe-widget { margin-top: 15px; }
+.stripe-widget h4 { font-size: 13px; text-transform: uppercase; color: #6f7780; margin-bottom: 8px; }
+.stripe-widget .stripe-row { display: flex; justify-content: space-between; font-size: 12px; padding: 2px 0; }
+.stripe-widget .stripe-status { font-size: 11px; padding: 1px 6px; border-radius: 3px; background: #eef; }
+.stripe-widget .stripe-empty { color: #9aa0a6; font-size: 12px; }
