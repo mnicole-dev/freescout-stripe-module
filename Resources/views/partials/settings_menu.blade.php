@@ -1,3 +1,1 @@
-<li class="@if (Route::currentRouteName() == 'stripe.settings') active @endif">
-    <a href="{{ route('stripe.settings', $mailbox->id) }}">{{ __('Stripe') }}</a>
-</li>
+<li @if (Route::currentRouteName() == 'stripe.settings')class="active"@endif><a href="{{ route('stripe.settings', $mailbox->id) }}"><i class="glyphicon glyphicon-credit-card"></i> {{ __('Stripe') }}</a></li>
