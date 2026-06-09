@@ -1,0 +1,19 @@
+{
+  "name": "Stripe",
+  "alias": "stripe",
+  "description": "Show a customer's Stripe data (subscriptions, invoices, payments) in the conversation sidebar.",
+  "version": "1.0.0",
+  "detailsUrl": "https://github.com/mnicole-dev/freescout-stripe-module",
+  "author": "KodeSaaS",
+  "authorUrl": "https://kodesaas.com",
+  "requiredAppVersion": "1.8.0",
+  "license": "AGPL-3.0",
+  "keywords": [],
+  "active": 0,
+  "order": 0,
+  "img": "",
+  "providers": ["Modules\\Stripe\\Providers\\StripeServiceProvider"],
+  "aliases": {},
+  "files": ["start.php"],
+  "requires": []
+}
