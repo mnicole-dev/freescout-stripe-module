@@ -37,4 +37,36 @@ class StripeServiceTest extends TestCase
         $service = new StripeService($gw);
         $this->assertSame('cus_new', $service->findCustomerByEmail('a@b.c')['id']);
     }
+
+    public function test_get_customer_data_assembles_normalized_view_model(): void
+    {
+        $gw = new FakeStripeGateway();
+        $gw->customers = [
+            ['id' => 'cus_1', 'name' => 'Alice', 'email' => 'alice@b.c', 'currency' => 'eur', 'created' => 1, 'balance' => -500],
+        ];
+        $gw->subscriptions = [
+            ['status' => 'active', 'plan' => 'Pro', 'amount' => 2000, 'currency' => 'eur', 'current_period_end' => 1750000000],
+        ];
+        $gw->invoices = [
+            ['number' => 'INV-1', 'amount' => 2000, 'currency' => 'eur', 'status' => 'paid', 'created' => 1700000000, 'url' => 'https://inv'],
+        ];
+        $gw->charges = [
+            ['amount' => 2000, 'currency' => 'eur', 'status' => 'succeeded', 'created' => 1700000001],
+        ];
+
+        $data = (new StripeService($gw))->getCustomerData('alice@b.c');
+
+        $this->assertSame('Alice', $data['customer']['name']);
+        $this->assertSame('-5.00 EUR', $data['customer']['balance']);
+        $this->assertSame('20.00 EUR', $data['subscriptions'][0]['amount']);
+        $this->assertSame('active', $data['subscriptions'][0]['status']);
+        $this->assertSame('INV-1', $data['invoices'][0]['number']);
+        $this->assertSame('https://inv', $data['invoices'][0]['url']);
+        $this->assertSame('20.00 EUR', $data['charges'][0]['amount']);
+    }
+
+    public function test_get_customer_data_returns_null_without_customer(): void
+    {
+        $this->assertNull((new StripeService(new FakeStripeGateway()))->getCustomerData('x@y.z'));
+    }
 }
