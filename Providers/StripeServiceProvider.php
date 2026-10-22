@@ -9,7 +9,10 @@ class StripeServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'stripe');
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'stripe');
+        // FreeScout modules translate with English strings as keys, resolved from JSON
+        // files (fr.json, de.json…). A per-locale PHP array under lang/fr/ is never
+        // consulted by __(), which is why every label stayed in English.
+        $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/lang');
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
         $this->hooks();
     }
