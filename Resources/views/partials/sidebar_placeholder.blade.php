@@ -1,7 +1,11 @@
 <div id="stripe-widget" class="stripe-widget" data-url="{{ route('stripe.widget', $conversation->id) }}">
     <div class="stripe-widget-loading text-help">{{ __('Loading Stripe…') }}</div>
 </div>
-<script>
+{{-- FreeScout serves a CSP whose script-src is "'self' 'nonce-…'" with no
+     'unsafe-inline'. An inline script without the nonce is silently dropped by the
+     browser: the placeholder then stays on "Loading Stripe…" forever and no request
+     is ever made. --}}
+<script type="text/javascript" {!! \Helper::cspNonceAttr() !!}>
 (function () {
     var el = document.getElementById('stripe-widget');
     if (!el) return;
