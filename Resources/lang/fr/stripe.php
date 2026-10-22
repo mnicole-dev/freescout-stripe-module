@@ -11,6 +11,7 @@ return [
     'Invoice' => 'Facture',
     'No Stripe customer' => 'Aucun client Stripe',
     'Loading Stripe…' => 'Chargement Stripe…',
+    'Stripe unavailable' => 'Stripe indisponible',
     'Could not load Stripe data.' => 'Impossible de charger les données Stripe.',
     'Invalid Stripe API key.' => 'Clé API Stripe invalide.',
     'Stripe API key saved.' => 'Clé API Stripe enregistrée.',

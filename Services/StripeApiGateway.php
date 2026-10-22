@@ -6,7 +6,13 @@ use Stripe\StripeClient;
 
 class StripeApiGateway implements StripeGateway
 {
-    /** Pinned Stripe API version. Confirm latest stable before release. */
+    /**
+     * Pinned Stripe API version, deliberately independent of the stripe-php
+     * version: the library ships its own default, we send ours so the shape of
+     * the objects we read cannot change under us when the package is upgraded.
+     * Moving it is a separate change — check the API changelog for field moves
+     * (see current_period_end below) before bumping.
+     */
     public const API_VERSION = '2025-03-31.basil';
 
     private StripeClient $client;
@@ -61,7 +67,10 @@ class StripeApiGateway implements StripeGateway
                 'plan' => $price->nickname ?? ($price->id ?? ''),
                 'amount' => $price->unit_amount ?? 0,
                 'currency' => $s->currency,
-                'current_period_end' => $s->current_period_end,
+                // Since the Basil API version the billing period lives on the
+                // subscription item, not the subscription: each item can have its
+                // own cycle. The fallback keeps older pinned API versions working.
+                'current_period_end' => $item->current_period_end ?? $s->current_period_end ?? null,
             ];
         }, $res->data);
     }
