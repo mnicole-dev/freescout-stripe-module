@@ -11,6 +11,7 @@ return [
     'Invoice' => 'Invoice',
     'No Stripe customer' => 'No Stripe customer',
     'Loading Stripe…' => 'Loading Stripe…',
+    'Stripe unavailable' => 'Stripe unavailable',
     'Could not load Stripe data.' => 'Could not load Stripe data.',
     'Invalid Stripe API key.' => 'Invalid Stripe API key.',
     'Stripe API key saved.' => 'Stripe API key saved.',
